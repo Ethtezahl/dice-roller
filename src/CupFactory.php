@@ -1,14 +1,22 @@
 <?php
 namespace Ethtezahl\DiceRoller;
 
+use Exception;
+use InvalidArgumentException;
+
 final class CupFactory
 {
     public function newInstance(string $pAsked = '')
     {
         $cup = new Cup();
-
+        $validationPattern = "/^\d?[dD]\d+(?>-[LH])?(?>[+-]\d?[dD]\d+)*$/";
+        
         if ('' === $pAsked) {
             return $cup;
+        }
+
+        if (!preg_match($validationPattern, $pAsked)) {
+            throw new InvalidArgumentException("Invalid dice notation. Check https://en.wikipedia.org/wiki/Dice_notation for valid strings.");
         }
 
         $parts = explode('+', $pAsked);
@@ -22,15 +30,29 @@ final class CupFactory
 
     private function analyze(string $pStr)
     {
-        $tmp = explode('D', $pStr);
+        $variantPattern = "/[dD-]/";
 
-        $number = $tmp[0];
-        $sides = $tmp[1];
+        $tmp = preg_split($variantPattern, $pStr);
+        $cnt = count($tmp);
 
-        if (!$number) {
-            $number = 1;
+
+        if ($cnt <= 2) {
+
+            $number = $tmp[0];
+            $sides = $tmp[1];
+            
+            if (!$number) {
+                $number = 1;
+            }
+            
+            return new Group($number, $sides);
+        } else {
+            
+            $number = $tmp[0];
+            $sides = $tmp[1];
+            $variant = $tmp[2];
+
+            return new Group($number, $sides, $variant);
         }
-
-        return new Group($number, $sides);
     }
 }
