@@ -1,26 +1,33 @@
 {
-    "name": "ethtezahl/dice-roller",
-    "type": "library",
-    "description": "RPG rolling dice simulation",
-    "keywords": ["dice", "roll", "rpg"],
-    "homepage": "https://github.com/Ethtezahl/dice-roller",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Bertrand Andres",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": ">=7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "Ethtezahl\\DiceRoller\\": "src",
-            "Ethtezahl\\DiceRoller\\Test\\": "test"
-        }
+  "name": "ethtezahl/dice-roller",
+  "type": "library",
+  "description": "RPG rolling dice simulation",
+  "keywords": [
+    "dice",
+    "roll",
+    "rpg"
+  ],
+  "homepage": "https://github.com/Ethtezahl/dice-roller",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bertrand Andres",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ethtezahl\\DiceRoller\\": "src",
+      "Ethtezahl\\DiceRoller\\Test\\": "test"
+    }
+  },
+  "scripts": {
+    "test": "./scripts/runTests"
+  }
 }
