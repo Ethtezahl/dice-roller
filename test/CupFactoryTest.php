@@ -21,6 +21,11 @@ final class CupFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testInstanceOneGroup()
     {
+        $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('2D6'));
+    }
+
+    public function testInstanceOneGroupLowercaseD()
+    {
         $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('2d6'));
     }
 

@@ -9,7 +9,7 @@ final class CupFactory
     public function newInstance(string $pAsked = '')
     {
         $cup = new Cup();
-        $validationPattern = "/^\d?d\d+(?>-[LH])?(?>[+-]\d?d\d+)*$/";
+        $validationPattern = "/^\d?[dD]\d+(?>-[LH])?(?>[+-]\d?[dD]\d+)*$/";
         
         if ('' === $pAsked) {
             return $cup;
@@ -30,7 +30,7 @@ final class CupFactory
 
     private function analyze(string $pStr)
     {
-        $variantPattern = "/[d-]/";
+        $variantPattern = "/[dD-]/";
 
         $tmp = preg_split($variantPattern, $pStr);
         $cnt = count($tmp);
