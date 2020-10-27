@@ -3,6 +3,7 @@ namespace Ethtezahl\DiceRoller\Test;
 
 use Ethtezahl\DiceRoller\Cup;
 use Ethtezahl\DiceRoller\CupFactory;
+use InvalidArgumentException;
 
 final class CupFactoryTest extends \PHPUnit\Framework\TestCase
 {
@@ -20,17 +21,17 @@ final class CupFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testInstanceOneGroup()
     {
-        $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('2D6'));
+        $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('2d6'));
     }
 
     public function testInstanceMultipleGroups()
     {
-        $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('2D6+3D4'));
+        $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('2d6+3d4'));
     }
 
     public function testRollWithSingleDice()
     {
-        $cup = $this->cupFactory->newInstance('D8');
+        $cup = $this->cupFactory->newInstance('d8');
 
         for ($i = 0; $i < 1000; $i++) {
             $test = $cup->roll();
@@ -41,12 +42,19 @@ final class CupFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testRollWithMultipleDice()
     {
-        $cup = $this->cupFactory->newInstance('2D6+3D4');
+        $cup = $this->cupFactory->newInstance('2d6+3d4');
 
         for ($i = 0; $i < 1000; $i++) {
             $test = $cup->roll();
             $this->assertGreaterThanOrEqual(5, $test);
             $this->assertLessThanOrEqual(24, $test);
         }
+    }
+
+    public function testInvalidDiceException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->cupFactory->newInstance('asdf');
+        
     }
 }
