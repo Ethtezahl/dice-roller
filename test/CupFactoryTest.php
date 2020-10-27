@@ -55,6 +55,10 @@ final class CupFactoryTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->cupFactory->newInstance('asfgsh');
-        
+    }
+
+    public function testAcceptDropLow()
+    {
+        $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('4d6-L'));
     }
 }
