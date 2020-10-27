@@ -29,6 +29,8 @@ final class Group
             throw new InvalidArgumentException('Variant roll indicator invalid.');
         }
 
+        $this->variant = $pVariant;
+
         for ($i = 0; $i < $number; $i++) {
             $this->dice[] = new Dice($pSides);
         }
@@ -36,13 +38,22 @@ final class Group
 
     public function roll() : int
     {
-        $dieArray = array();
+        $resultArray = array();
 
-        foreach ($this->dice as $dice) {
-            array_push($dieArray, $dice->roll());
+        foreach ($this->dice as $die) {
+            array_push($resultArray, $die->roll());
         }
         
-        $sum = 0;
+        sort($resultArray, SORT_NUMERIC);
+
+        if (strcmp($this->variant,'L') == 0) {
+            array_reverse($resultArray);
+            array_pop($resultArray);
+        } else if (strcmp($this->variant,'H') == 0) {
+            array_pop($resultArray);
+        }
+
+        $sum = array_sum($resultArray);
         return $sum;
     }
 }

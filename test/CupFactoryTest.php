@@ -61,4 +61,15 @@ final class CupFactoryTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(Cup::class, $this->cupFactory->newInstance('4d6-L'));
     }
+
+    public function testDropLowResult()
+    {
+        $cup = $this->cupFactory->newInstance('4d6-L');
+
+        for ($i = 0; $i < 1000; $i++) {
+            $test = $cup->roll();
+            $this->assertGreaterThanOrEqual(3, $test);
+            $this->assertLessThanOrEqual(18, $test);
+        }
+    }
 }
