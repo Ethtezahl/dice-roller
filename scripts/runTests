@@ -1,0 +1,6 @@
+#!/bin/bash
+
+./vendor/bin/phpunit ./test/CupFactoryTest.php
+./vendor/bin/phpunit ./test/CupTest.php
+./vendor/bin/phpunit ./test/DiceTest.php
+./vendor/bin/phpunit ./test/GroupTest.php
