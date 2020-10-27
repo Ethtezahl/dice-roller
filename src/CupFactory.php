@@ -22,10 +22,13 @@ final class CupFactory
 
     private function analyze(string $pStr)
     {
-        $tmp = explode('D', $pStr);
+        $pattern = "/[d-]/";
+        $tmp = preg_split($pattern, $pStr);
 
         $number = $tmp[0];
         $sides = $tmp[1];
+
+        //TODO add validation
 
         if (!$number) {
             $number = 1;
