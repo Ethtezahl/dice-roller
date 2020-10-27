@@ -54,7 +54,7 @@ final class CupFactoryTest extends \PHPUnit\Framework\TestCase
     public function testInvalidDiceException()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->cupFactory->newInstance('asdf');
+        $this->cupFactory->newInstance('asfgsh');
         
     }
 }
